@@ -28,7 +28,7 @@ int main(){
 
     while(1){
         printf(ANSI_COLOR_BLACK "-- MENU MONOPOLY --\n\n");
-        printf(" [1] RECEBER\n [2] PAGAMENTO\n [3] TRANSFERÊNCIA\n [4] COMPRAR PROPRIEDADE\n [5] VENDER PROPRIEDADE\n [6] ALUGUÉIS\n-> ");
+        printf(" [1] RECEBER\n [2] PAGAMENTO\n [3] TRANSFERÊNCIA\n [4] COMPRAR PROPRIEDADE\n [5] VENDER PROPRIEDADE\n [6] ALUGUÉIS\n [0] SAIR\n-> ");
         scanf("%d", &Options);
         cin.ignore();
 
@@ -50,12 +50,24 @@ int main(){
             SystemClear();
             ThirdPreview(option, NumberOfPlayers, &jog[0], &prop[0], &rent[0]);
         }
+        else if(!Options)
+            break;
 
         PrintScreen(NumberOfPlayers, &jog[0], &prop[0]);
     }
 
+    SystemClear();
+    int maior = jog[0].money;
+    int IdPlayer = 0;
+    for(int i=1;i<NumberOfPlayers;i++){
+        if(jog[i].money > maior){
+            maior = jog[i].money;
+            IdPlayer = i;
+        }
+    }
 
 
+    printf(ANSI_COLOR_RED" WINNER = %s\n", jog[IdPlayer].name);
 
     return 0;
 }
